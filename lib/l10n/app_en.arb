@@ -1,0 +1,67 @@
+{
+   "error_auth": "Something went wrong :(",
+   "no_internet": "No internet connection",
+   "slow_internet": "Download canceled due to slow internet connection, as soon as internet speed improves your data will be added to the network.",
+   "validation": "Not all data entered",
+
+   "login": "Login",
+   "mail": "Email",
+   "password": "Password",
+   "registration": "Registration",
+   "forgot_password": "Forgot your password?",
+   "welcome": "Welcome!",
+   "welcome_explanation": "To save your data on any device, please register",
+
+   "your_name": "Enter a name",
+   "meet": "What's your name?",
+
+   "done": "Exit",
+   "skip": "Skip",
+
+   "password_reset_text": "Enter email to reset password",
+   "reset_password": "Reset password",
+
+   "healer": "healthier",
+   "my_course": "My drugs",
+   "recipe": "Drug archive",
+   "add_recipe_to_archive": "Save medicine to the cloud? ",
+
+   "add_recipe": "Add Recipe",
+   "namePill": "Pill Name",
+   "descriptionPill": "Description of the drug: you can write the number of pills, the conditions for taking (before or after a meal), a description of the drug. ",
+   "add_photo": "Add drug photo",
+   "change_photo": "Change drug photo",
+   "add_time_pills": "Add Pills Time",
+
+   "del_recipe": "Delete medicine?",
+   "del": "Delete",
+   "yes": "Yes",
+   "no": "No",
+   "gallery": "gallery",
+   "camera": "Camera",
+   "cancel": "Cancel",
+   "next": "Next",
+
+   "settings": "Settings",
+   "settings_push": "Settings for notifications",
+   "name": "Name",
+   "account": "Account",
+   "exit": "Close",
+   "back": "Back",
+
+
+   "time_pills": "Medication time:",
+
+   "allow_notifications": "Allow notifications",
+   "app_to_send_notifications": "The Healthnier app wants to send you notifications",
+   "disable":"Disable",
+   "allow": "Allow",
+   "time_medication": "Medication Time:",
+   "logoff": "Are you sure you want to log out?",
+
+   "my_course_info": "This section displays the medications you are currently taking. Please add your medication.",
+   "recipe_info": "This section displays your recipes that you have taken in the past. Click on this tab and create a new recipe by clicking the plus sign.",
+   "daily": "Daily",
+   "in_one_day": "In a day",
+   "in_two_days": "In 2 days"
+}
