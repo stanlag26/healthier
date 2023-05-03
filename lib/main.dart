@@ -20,16 +20,19 @@ Future<void> main() async {
     null,
     [
       NotificationChannel(
+
         channelKey: 'basic_channel',
         channelName: 'Basic Notifications',
-        defaultColor: Colors.teal,
+        defaultColor: Colors.white,
         importance: NotificationImportance.Max,
-        channelShowBadge: true, channelDescription: 'basic_channel',
+        channelShowBadge: true,
+        channelDescription: 'basic_channel',
         locked: true,
+        playSound: true,
         enableLights: true,
         enableVibration: true,
         onlyAlertOnce: false,
-        criticalAlerts: true,
+        defaultPrivacy: NotificationPrivacy.Public,
         soundSource: 'resource://raw/res_custom_notification',
       ),
     ],

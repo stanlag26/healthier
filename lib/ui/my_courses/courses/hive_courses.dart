@@ -11,14 +11,18 @@ import '../../../api/resource/resource.dart';
 import '../../../api/timeofdate/timeofdate.dart';
 import '../../../const/const.dart';
 import '../../../my_widgets/my_show_dialog.dart';
+import '../../navigation/my_navigation.dart';
 import 'hive_courses_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+late AppLocalizations appLocalizations;
 
 class CoursesProviderWidget extends StatelessWidget {
   const CoursesProviderWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    appLocalizations = AppLocalizations.of(context);
     return ChangeNotifierProvider.value(
         value: CoursesModel(), child: const Courses());
   }

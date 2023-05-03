@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../ui/my_courses/courses/hive_courses.dart';
 import '../main_navigation/main_navigation.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -30,6 +31,23 @@ class NotificationService {
       allowWhileIdle: true,
       preciseAlarm: true,
     );
+
+    if (periodicity == 0) {
+      if (startNamePill != now) {
+          schedule = NotificationCalendar(
+            weekday: now.weekday,
+            day: now.day,
+            hour: hour,
+            minute: minute,
+            second: 0,
+            millisecond: 0,
+            repeats: true,
+            timeZone: timeZone,
+            allowWhileIdle: true,
+            preciseAlarm: true,
+          );
+      }
+    }
 
     if (periodicity == 1) {
       if (startNamePill != now) {
@@ -79,20 +97,23 @@ class NotificationService {
       notificationLayout: NotificationLayout.Default,
       wakeUpScreen: true,
       autoDismissible: true,
-      criticalAlert: true,
       locked: true,
-      fullScreenIntent: true,
       payload: {'periodicity': periodicity.toString()},
     );
 
     final actionButtons = [
       NotificationActionButton(
         key: 'DONE',
-        label: 'Хорошо',
+        label: appLocalizations.good,
       ),
       NotificationActionButton(
         key: 'REMIND_LATER',
-        label: 'Напомнить через 15 минут',
+        label: appLocalizations.in_15_min,
+      ),
+      NotificationActionButton(
+        key: 'Cancel',
+        label: appLocalizations.cancel,
+        actionType: ActionType.DismissAction
       ),
     ];
 
@@ -103,61 +124,7 @@ class NotificationService {
     );
   }
 
-  // static Future<void> createNotification({
-  //   required int notificationId,
-  //   required String name,
-  //   required String description,
-  //   required String photo,
-  //   required int hour,
-  //   required int minute,
-  //   required int periodicity,
-  //
-  // }) async {
-  //   final timeZone = await AwesomeNotifications().getLocalTimeZoneIdentifier();
-  //   final schedule = NotificationCalendar(
-  //     hour: hour,
-  //     minute: minute,
-  //     second: 0,
-  //     millisecond: 0,
-  //     repeats: true,
-  //     timeZone: timeZone,
-  //     allowWhileIdle: true,
-  //     preciseAlarm: true,
-  //
-  //   );
-  //   final content = NotificationContent(
-  //     id: notificationId,
-  //     channelKey: 'basic_channel',
-  //     title: name,
-  //     body: description,
-  //     icon: 'resource://drawable/notification_icon',
-  //     bigPicture: photo,
-  //     notificationLayout: NotificationLayout.Default,
-  //     wakeUpScreen: true,
-  //     autoDismissible:false,
-  //     criticalAlert: true,
-  //     locked: true,
-  //     fullScreenIntent: true,
-  //
-  //   );
-  //
-  //   final actionButtons = [
-  //     NotificationActionButton(
-  //       key: 'DONE',
-  //       label: 'Хорошо',
-  //     ),
-  //     NotificationActionButton(
-  //       key: 'REMIND_LATER',
-  //       label: 'Напомнить через 15 минут',
-  //     ),
-  //   ];
-  //
-  //   await AwesomeNotifications().createNotification(
-  //     content: content,
-  //     actionButtons: actionButtons,
-  //     schedule: schedule,
-  //   );
-  // }
+
 
   static Future<void> onActionReceived(ReceivedAction receivedAction) async {
     int id = receivedAction.id!;

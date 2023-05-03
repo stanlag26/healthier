@@ -63,5 +63,8 @@
    "recipe_info": "This section displays your recipes that you have taken in the past. Click on this tab and create a new recipe by clicking the plus sign.",
    "daily": "Daily",
    "in_one_day": "In a day",
-   "in_two_days": "In 2 days"
+   "in_two_days": "In 2 days",
+
+    "good": "Good",
+    "in_15_min": "Remind me in 15 minutes"
 }

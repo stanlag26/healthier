@@ -16,9 +16,9 @@ import '../my_courses/edit_courses/edit_courses.dart';
 import '../my_courses/view_course/view_course.dart';
 import '../settings/settings.dart';
 
+
 class MyNavigation extends StatelessWidget {
   const MyNavigation({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
