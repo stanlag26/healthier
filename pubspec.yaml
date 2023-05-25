@@ -59,6 +59,7 @@ dependencies:
   app_settings: ^4.2.0
   flutter_native_splash: ^2.2.19
   dropdown_textfield: ^1.0.8
+  appmetrica_plugin: ^1.1.0
 
 
 dev_dependencies:

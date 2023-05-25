@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,9 @@ import 'package:healthier/api/resource/resource.dart';
 import 'package:healthier/my_widgets/my_show_dialog.dart';
 import 'package:provider/provider.dart';
 import '../../../api/date_format/date_format.dart';
+import '../../../api/internet_connection/internet_connection.dart';
 import '../../../const/const.dart';
+import '../../../my_widgets/animated_icon_button.dart';
 import '../../../my_widgets/my_avatar_photo.dart';
 import '../../../my_widgets/my_button.dart';
 import '../../../api/my_functions/my_functions.dart';
@@ -52,12 +56,12 @@ class AddCourses extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
             title: Text(
-              AppLocalizations.of(context)!.add_recipe,
+              'Сохранить тут ->',
               style: MyTextStyle.textStyle25,
             ),
             actions: [
-              IconButton(
-                  onPressed: () async {
+              AnimatedIconButton(
+                  onPress: () async {
                     if (namePillController.text.isEmpty ||
                         descriptionPillController.text.isEmpty ||
                         model.timeOfReceipt.isEmpty) {
@@ -65,6 +69,7 @@ class AddCourses extends StatelessWidget {
                       return;
                     } else {
                       model.saveNewCoursesToHive();
+                      model.saveCoursesToPush();
                     await  showDialog<void>  (
                           context: context,
                           barrierDismissible: false, // user must tap button!
@@ -72,7 +77,19 @@ class AddCourses extends StatelessWidget {
                             return MyShowMyAlertDialog(
                               text: AppLocalizations.of(context)!.add_recipe_to_archive,
                               onPressed: () async {
+                                if (await checkInternetConnection() != true) {
+                                  if (context.mounted) {
+                                    myToast(AppLocalizations.of(context)!.no_internet);
+                                  }
+                                  return;
+                                }
                                 if (context.mounted) showMyDialogCircular(context);
+
+                                Timer(const Duration(seconds: 15), () {
+                                  if (context.mounted) Navigator.of(context, rootNavigator: true).pop();
+                                  if (context.mounted) Navigator.pop(context);
+                                  myToast(AppLocalizations.of(context)!.bad_internet);
+                                });
                                 if (context.mounted)  await model.completeCourseAndToFirebase(context);
 
                                 if (context.mounted) Navigator.of(context, rootNavigator: true).pop();
@@ -124,7 +141,7 @@ class AddCourses extends StatelessWidget {
                         val as DropDownValueModel;
                         model.periodicity = val.value;
                         print(val.value);
-                      },),
+                      }, initialValue: AppLocalizations.of(context)!.daily,),
                   ],
                 ),
               ),

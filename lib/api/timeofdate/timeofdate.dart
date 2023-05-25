@@ -18,3 +18,6 @@ Future<String?> formatTime(BuildContext context) async {
   return null;
 }
 
+Duration calculateTimeInterval(DateTime startTime, DateTime endTime) {
+  return endTime.difference(startTime);
+}

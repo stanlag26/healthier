@@ -6,6 +6,11 @@ import 'package:hive_flutter/adapters.dart';
 import 'api/awesome_notifications_push/notifications.dart';
 import 'entity/course_hive.dart';
 import 'firebase_options.dart';
+import 'package:appmetrica_plugin/appmetrica_plugin.dart';
+
+
+
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,9 +20,11 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  AppMetrica.activate(const AppMetricaConfig("77553fa4-af39-4b16-ad52-248e33ad1524",logs: true));
+  AppMetrica.reportEvent('My first AppMetrica event!');
 
   AwesomeNotifications().initialize(
-    null,
+    'resource://drawable/notification_icon',
     [
       NotificationChannel(
 
@@ -27,7 +34,7 @@ Future<void> main() async {
         importance: NotificationImportance.Max,
         channelShowBadge: true,
         channelDescription: 'basic_channel',
-        locked: true,
+        locked: false,
         playSound: true,
         enableLights: true,
         enableVibration: true,
@@ -37,7 +44,20 @@ Future<void> main() async {
       ),
     ],
   );
-  AwesomeNotifications().setListeners(onActionReceivedMethod:NotificationService.onActionReceived);
-  runApp(const MyNavigation());
+  AwesomeNotifications().setListeners(
+      onActionReceivedMethod:         NotificationService.onActionReceivedMethod,
+      // onNotificationCreatedMethod:    NotificationService.onNotificationCreatedMethod,
+      onNotificationDisplayedMethod:  NotificationService.onNotificationDisplayedMethod,
+      // onDismissActionReceivedMethod:  NotificationService.onDismissActionReceivedMethod
+      );
+
+  // Получение списка запланированных уведомлений
+  List<NotificationModel> scheduledNotifications = await AwesomeNotifications().listScheduledNotifications();
+
+  // Печать информации о каждом запланированном уведомлении
+  scheduledNotifications.forEach((notification) {
+    print('Уведомление с id ${notification.content?.id} запланировано на ${notification.schedule..toString()}');
+  });
+  runApp( MyNavigation());
 }
 

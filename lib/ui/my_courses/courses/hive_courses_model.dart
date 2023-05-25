@@ -21,14 +21,14 @@ class CoursesModel extends ChangeNotifier {
     _box = await Hive.openBox<CourseHive>('courses_box');
     _courses = _box.values.toList();
     _box.listenable().addListener(() => _readCoursesFromHive());
-    // _saveCoursesToPush();
+     // _saveCoursesToPush();
     notifyListeners();
 
   }
 
   Future<void> _readCoursesFromHive() async {
     _courses = _box.values.toList();
-    _saveCoursesToPush();
+    // _saveCoursesToPush();
     notifyListeners();
   }
 
@@ -47,8 +47,10 @@ class CoursesModel extends ChangeNotifier {
     int count = 0;
     List<String> timeSplit;
     for (var course in _courses) {
+      print(course.periodicity);
       for (var time in course.timeOfReceipt) {
         timeSplit = time.split(':');
+
         await NotificationService.createNotification(
             notificationId: count++,
             name: course.namePill,

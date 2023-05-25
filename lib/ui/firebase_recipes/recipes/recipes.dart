@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +103,11 @@ class CardWidget extends StatelessWidget {
                             return;
                           }
                           if (context.mounted) showMyDialogCircular(context);
+                          Timer(const Duration(seconds: 15), () {
+                            if (context.mounted) Navigator.of(context, rootNavigator: true).pop();
+                            if (context.mounted) Navigator.pop(context);
+                            myToast(AppLocalizations.of(context)!.bad_internet);
+                          });
                           await saveCoursesToHiveFromFirebase(course);
                           if (context.mounted) {
                             Navigator.of(context, rootNavigator: true).pop();

@@ -4,8 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyDropDownTextField extends StatelessWidget {
   final Function(dynamic) onChanged;
+  final String initialValue;
   const MyDropDownTextField({
-    super.key, required this.onChanged,
+    super.key, required this.onChanged, required this.initialValue,
   });
 
   @override
@@ -13,15 +14,15 @@ class MyDropDownTextField extends StatelessWidget {
     return Expanded(
       flex:6,
       child: DropDownTextField(
-        initialValue: AppLocalizations.of(context)!.back,
+        initialValue: initialValue,
         onChanged: onChanged,
-        dropDownList: const [
-          DropDownValueModel(name: 'Ежедневно', value: 0),
-          DropDownValueModel(name: 'Через день', value: 1),
-          DropDownValueModel(name: 'Через 2 дня', value: 2),
+        dropDownList:  [
+          DropDownValueModel(name: AppLocalizations.of(context)!.daily, value: 0),
+          DropDownValueModel(name: AppLocalizations.of(context)!.in_one_day, value: 1),
+          DropDownValueModel(name: AppLocalizations.of(context)!.in_two_days, value: 2),
         ],
         textFieldDecoration: InputDecoration(
-            labelText:'Переодичность',
+            labelText:AppLocalizations.of(context)!.periodicity,
           contentPadding:
           const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
           isDense: true,

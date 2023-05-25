@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import '../../../api/awesome_notifications_push/notifications.dart';
 import '../../../api/firebase_api/firebase_api.dart';
 import '../../../api/hive_api/hive_api.dart';
+import '../../../api/resource/resource.dart';
 import '../../../api/timeofdate/timeofdate.dart';
 import '../../../entity/course.dart';
 import '../../../entity/course_hive.dart';
@@ -23,6 +25,27 @@ class AddCoursesModel extends ChangeNotifier {
   XFile? pickedFile;
   String? photoPill;
 
+
+  Future<void> saveCoursesToPush() async {
+    await NotificationService.cancelScheduledNotifications();
+    List<String> timeSplit;
+    for (var time in timeOfReceipt) {
+      timeSplit = time.split(':');
+      await NotificationService.createNotification(
+        notificationId: -1,
+        name: namePill,
+        description: descriptionPill,
+        photo: (photoPill==null)
+            ? 'asset://${Resource.pills}'
+            :'file://${photoPill}',
+        hour: int.parse(timeSplit[0]),
+        minute: int.parse(timeSplit[1]),
+        periodicity: periodicity,
+        startNamePill: startNamePill,
+      );
+
+    }
+  }
 
   Future<void> selectDateStart(BuildContext context) async {
     final DateTime? picked = await showDatePicker(

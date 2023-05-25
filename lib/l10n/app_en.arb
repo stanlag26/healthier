@@ -48,6 +48,7 @@
    "account": "Account",
    "exit": "Close",
    "back": "Back",
+   "back_to_drug_list":"Back to drug list",
 
 
    "time_pills": "Medication time:",
@@ -66,5 +67,15 @@
    "in_two_days": "In 2 days",
 
     "good": "Good",
-    "in_15_min": "Remind me in 15 minutes"
+    "in_5_min": "Remind later",
+
+    "start":"Start",
+    "end":"End",
+    "no_time_limit":"No time limit",
+    "periodicity":"Periodicity",
+
+     "click_save":"Click save ->",
+     "bad_internet": "Bad internet speed, failed to save the medicine in the cloud"
+
+
 }

@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:appmetrica_plugin/appmetrica_plugin.dart';
 import 'package:flutter/services.dart';
 import 'package:healthier/entity/course_hive.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import '../../../api/awesome_notifications_push/notifications.dart';
 import '../../../api/date_format/date_format.dart';
 import '../../../api/main_navigation/main_navigation.dart';
 import '../../../api/my_functions/my_functions.dart';
@@ -11,7 +13,6 @@ import '../../../api/resource/resource.dart';
 import '../../../api/timeofdate/timeofdate.dart';
 import '../../../const/const.dart';
 import '../../../my_widgets/my_show_dialog.dart';
-import '../../navigation/my_navigation.dart';
 import 'hive_courses_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -91,6 +92,7 @@ class _CoursesState extends State<Courses> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         onPressed: () {
           Navigator.pushNamed(context, MainNavigationRouteNames.coursesAdd);
+          AppMetrica.reportEvent('My first AppMetrica event!');
         },
         child: const Icon(Icons.add),
       ),
@@ -133,8 +135,8 @@ class CardWidget extends StatelessWidget {
           ),
           title: Text(model.courses[indexInList].namePill),
           subtitle: Text(
-              'Начало курса: ${formatDateTime(model.courses[indexInList].startNamePill!)}. \n'
-              'Периодичность: ${periodString(model.courses[indexInList].periodicity)}. \n'
+              '${AppLocalizations.of(context)!.start}: ${formatDateTime(model.courses[indexInList].startNamePill!)}. \n'
+              '${AppLocalizations.of(context)!.periodicity}: ${periodString(model.courses[indexInList].periodicity)}. \n'
                   '${AppLocalizations.of(context)!.time_pills} ${listToString(model.courses[indexInList].timeOfReceipt)}'),
           trailing: IconButton(
               onPressed: () {
@@ -146,6 +148,7 @@ class CardWidget extends StatelessWidget {
                         text: AppLocalizations.of(context)!.del_recipe,
                         onPressed: () {
                           model.deleteCourse(indexInList);
+                          NotificationService.cancelScheduledNotifications();
                           Navigator.of(context).pop();
                         },
                       );

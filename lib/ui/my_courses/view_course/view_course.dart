@@ -15,12 +15,13 @@ class ViewCourse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final list = ModalRoute.of(context)!.settings.arguments as List;
-    // final periodicity = list[3](2).toString() ;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(list[0], style: MyTextStyle.textStyle25BoldWhite),
+          elevation: 0,
+          backgroundColor: Colors.white10,
+          title: Text(list[0], style: MyTextStyle.textStyle25Bold),
         ),
         body: SafeArea(
           child: ListView(
@@ -43,9 +44,9 @@ class ViewCourse extends StatelessWidget {
                           fit: BoxFit.cover)),
                 ),
               MyButton(
-                  myText: Text(AppLocalizations.of(context)!.back),
+                  myText: Text(AppLocalizations.of(context)!.back_to_drug_list),
                   onPress: () {
-                 Navigator.pushNamed(context,MainNavigationRouteNames.main);
+                 Navigator.popAndPushNamed(context,MainNavigationRouteNames.main);
                   }),
           MyButton(
               myText: Text(AppLocalizations.of(context)!.exit),

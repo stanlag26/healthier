@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../api/awesome_notifications_push/notifications.dart';
 import '../../api/main_navigation/main_navigation.dart';
 import '../../const/const.dart';
+import '../../main.dart';
 import '../auth/forget_password/forget_password.dart';
 import '../auth/sing_in_reg/sing_in_reg.dart';
 import '../bottom_navigation_bar/bottom_navigation_bar.dart';
@@ -18,7 +19,8 @@ import '../settings/settings.dart';
 
 
 class MyNavigation extends StatelessWidget {
-  const MyNavigation({Key? key}) : super(key: key);
+  MyNavigation({Key? key}) : super(key: key);
+ static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
