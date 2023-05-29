@@ -10,6 +10,8 @@ import '../auth/sing_in_reg/sing_in_reg.dart';
 import '../bottom_navigation_bar/bottom_navigation_bar.dart';
 // import 'package:device_preview/device_preview.dart';
 import '../firebase_recipes/recipes/recipes.dart';
+import '../health_journal/health_journal_add_data/health_journal_add_data.dart';
+import '../health_journal/health_journal_category/health_journal.dart';
 import '../intro/info.dart';
 import '../my_courses/add_courses/add_courses.dart';
 import '../my_courses/courses/hive_courses.dart';
@@ -60,7 +62,8 @@ class MyNavigation extends StatelessWidget {
         MainNavigationRouteNames.coursesView: (context) =>  const ViewCourse(),
         MainNavigationRouteNames.intro: (context) => const Intro(),
         MainNavigationRouteNames.settings: (context) =>  const Settings(),
-
+        MainNavigationRouteNames.category: (context) =>  const HealthJournal(),
+        MainNavigationRouteNames.categoryAddData: (context) =>  const HealthJournalAddData(),
       },
     );
   }

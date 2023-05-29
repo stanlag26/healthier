@@ -5,4 +5,9 @@ abstract class Resource {
   static const String blank = 'images/blank.png';
   static const String myCourse = 'images/my_course.png';
 
+  static const String arterialPressure = 'images/ad.png';
+  static const String BodyTemperature = 'images/tt.png';
+  static const String BodyWeight = 'images/vt.png';
+  static const String BloodSugar = 'images/sk.png';
+
 }

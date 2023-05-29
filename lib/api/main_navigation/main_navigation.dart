@@ -11,6 +11,8 @@ abstract class MainNavigationRouteNames {
   static const coursesView = 'courses/view';
   static const intro = 'intro';
   static const  settings = 'main/settings';
+  static const  category = 'category';
+  static const  categoryAddData = 'category/categoryAddData';
 }
 
 

@@ -5,6 +5,7 @@ import '../../api/main_navigation/main_navigation.dart';
 import '../../const/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../firebase_recipes/recipes/recipes.dart';
+import '../health_journal/health_journal_category/health_journal.dart';
 import '../my_courses/courses/hive_courses.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -19,6 +20,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   List<Widget> widgetOptions = <Widget>[
     const CoursesProviderWidget(),
+    const HealthJournal(),
     const Recipes(),
   ];
 
@@ -52,6 +54,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
           BottomNavigationBarItem(
             icon: const Icon(FontAwesomeIcons.pills),
             label: AppLocalizations.of(context)!.my_course,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(FontAwesomeIcons.bookMedical),
+            label: AppLocalizations.of(context)!.health_journal,
           ),
           BottomNavigationBarItem(
             icon: const Icon(FontAwesomeIcons.prescriptionBottleMedical),

@@ -5,6 +5,7 @@ import 'package:healthier/ui/navigation/my_navigation.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'api/awesome_notifications_push/notifications.dart';
 import 'entity/course_hive.dart';
+import 'entity/health_monitoring.dart';
 import 'firebase_options.dart';
 import 'package:appmetrica_plugin/appmetrica_plugin.dart';
 
@@ -17,6 +18,8 @@ Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(CourseHiveAdapter());
   await Hive.openBox('user_box');
+  Hive.registerAdapter(HealthMonitoringHiveAdapter());
+  await Hive.openBox('healthMonitoring_box');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

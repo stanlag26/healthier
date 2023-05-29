@@ -75,7 +75,6 @@
     "periodicity":"Periodicity",
 
      "click_save":"Click save ->",
-     "bad_internet": "Bad internet speed, failed to save the medicine in the cloud"
-
-
+     "bad_internet": "Bad internet speed, failed to save the medicine in the cloud",
+     "health_journal":"Health Journal"
 }
