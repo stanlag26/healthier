@@ -19,7 +19,7 @@ Future<void> main() async {
   Hive.registerAdapter(CourseHiveAdapter());
   await Hive.openBox('user_box');
   Hive.registerAdapter(HealthMonitoringHiveAdapter());
-  await Hive.openBox('healthMonitoring_box');
+  await Hive.openBox <HealthMonitoringHive>('healthMonitoring_box');
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

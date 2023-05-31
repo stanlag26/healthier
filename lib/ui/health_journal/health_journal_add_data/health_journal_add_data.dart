@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:healthier/const/const.dart';
 import 'package:healthier/my_widgets/my_button_category.dart';
-
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import '../../../my_widgets/my_text_field_for_categry.dart';
 import '../../../my_widgets/my_time_interval_category.dart';
+import 'health_journal_add_data_model.dart';
 
 
-
-
-
-class HealthJournalAddData extends StatelessWidget {
-  const HealthJournalAddData({Key? key}) : super(key: key);
+class HealthJournalAddDataProviderWidget extends StatelessWidget {
+  const HealthJournalAddDataProviderWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Map <String, String> healthJournal = ModalRoute.of(context)!.settings.arguments as Map<String, String>;
+    return ChangeNotifierProvider.value(
+        value:HealthJournalAddDataModel(), child: HealthJournalAddData(healthJournal: healthJournal,));
+  }
+}
+
+
+class HealthJournalAddData extends StatelessWidget {
+  const HealthJournalAddData({Key? key, required this.healthJournal}) : super(key: key);
+  final Map <String, String> healthJournal;
+  @override
+  Widget build(BuildContext context) {
+    final model = context.watch<HealthJournalAddDataModel>();
+    model.index = int.parse(healthJournal['id'] ?? '0');
+    final DateFormat formatter = DateFormat('HH:mm, dd.MM.yyyy');
+    
     return Scaffold(
       appBar: AppBar(
-        title: Text('Артериальное давление'),
+        title: Text(healthJournal['name'].toString()),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -32,16 +47,20 @@ class HealthJournalAddData extends StatelessWidget {
                 height: 10,
               ),
               MyTextFieldCategory(
+                onTab: () {model.selectStartIndication(context);},
                 labelText: 'Дата и время замера',
                 readOnly: true,
-                textEditingController: TextEditingController(text: 'Сейчас'),
+                textEditingController: TextEditingController(text: formatter.format(model.startIndication)),
               ),
               MyTextFieldCategory(
-                labelText: ' Введите давление (120/80)',
+                labelText: healthJournal['labelText'].toString(),
                 readOnly: false,
                 textEditingController: TextEditingController(),
+                onChanged: (value) {model.indication = value;},
               ),
-              MyButtonCategory(myText: const Text('Добавить'), onPress: (){}),
+              MyButtonCategory(myText: const Text('Добавить'), onPress: (){
+                model.saveNewIndicationToHive();
+              }),
               SizedBox(
                 height: 20,
               ),
@@ -55,13 +74,13 @@ class HealthJournalAddData extends StatelessWidget {
               SizedBox(
                   height: 600,
                   child: ListView.builder(
-                      itemCount: 5,
+                      itemCount: model.indications.length,
                       itemBuilder: (BuildContext context, int index) {
                         return MyTimeIntervalCategory(
-                          count: 5,
-                          titleText: '120/80',
-                          subtitleText: '12:00 23.05.2023',
-                          onPress: () {},
+                          count: model.indications.length,
+                          titleText: '${model.indications[index].indications} ${healthJournal['gauge'].toString()}',
+                          subtitleText: formatter.format(model.indications[index].data),
+                          onPress: () {model.delIndication(model.indications[index].key);},
                         );
                       })),
 

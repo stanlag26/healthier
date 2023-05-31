@@ -58,8 +58,8 @@ class MyCategoryCard extends StatelessWidget {
                         indications,
                         style: MyTextStyle.textStyle25Bold,
                       ),
-                      upperlower != ''?Text(
-                        upperlower,
+                      upperlower != 'null' ?Text(
+                        upperlower!,
                         style: MyTextStyle.textStyle10,
                       ): Container(),
                       const SizedBox(height: 10,),

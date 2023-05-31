@@ -62,8 +62,8 @@ class MyNavigation extends StatelessWidget {
         MainNavigationRouteNames.coursesView: (context) =>  const ViewCourse(),
         MainNavigationRouteNames.intro: (context) => const Intro(),
         MainNavigationRouteNames.settings: (context) =>  const Settings(),
-        MainNavigationRouteNames.category: (context) =>  const HealthJournal(),
-        MainNavigationRouteNames.categoryAddData: (context) =>  const HealthJournalAddData(),
+        MainNavigationRouteNames.category: (context) =>  const HealthJournalProviderWidget(),
+        MainNavigationRouteNames.categoryAddData: (context) =>  const HealthJournalAddDataProviderWidget(),
       },
     );
   }

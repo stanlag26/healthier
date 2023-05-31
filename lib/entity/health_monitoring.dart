@@ -1,4 +1,3 @@
-
 import 'package:hive/hive.dart';
 
 part 'health_monitoring.g.dart';
@@ -6,23 +5,18 @@ part 'health_monitoring.g.dart';
 @HiveType(typeId: 2)
 class HealthMonitoringHive extends HiveObject {
   @HiveField(0)
-  final List <String> bodyPressure;
+  final int id;
 
   @HiveField(1)
-  final List <String> bodyWeight;
+  final String indications;
 
   @HiveField(2)
-  final List <String> bodyTemperature;
+  final DateTime data;
 
-  @HiveField(3)
-  final List <String> bloodSugar;
-
-
-  HealthMonitoringHive({
-    required this.bodyPressure,
-    required this.bodyWeight,
-    required this.bodyTemperature,
-    required this.bloodSugar,
+  HealthMonitoringHive( {
+    required this.id,
+    required this.indications,
+    required this.data,
   });
 }
 

@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:healthier/entity/course.dart';
 import 'package:hive/hive.dart';
 import '../../entity/course_hive.dart';
+import '../../entity/health_monitoring.dart';
 import '../firebase_api/firebase_api.dart';
 
 Future<void> saveCoursesToHiveFromFirebase(Course course) async {
@@ -30,7 +33,6 @@ Future<void> saveCoursesToHive(CourseHive course) async {
       endNamePill: course.endNamePill,
       periodicity: course.periodicity);
   await box.add(courseHive);
-  print(courseHive);
 }
 
 void saveEditCourse( int listIndex,CourseHive courseHive ) async {
@@ -52,3 +54,13 @@ String nameUser()  {
 }
 
 
+Future<void> saveIndicationToHive(int index, String indication, DateTime startIndication) async {
+  final box = await Hive.openBox<HealthMonitoringHive>('healthMonitoring_box');
+  int keyIndications = Random().nextInt(1000000);
+  final healthMonitoringHive = HealthMonitoringHive(id: index, indications: indication, data: startIndication);
+  //await box.put(startIndication.microsecond,healthMonitoringHive);
+  await box.add(healthMonitoringHive);
+  print(healthMonitoringHive.key);
+
+
+}

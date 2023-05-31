@@ -20,7 +20,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
 
   List<Widget> widgetOptions = <Widget>[
     const CoursesProviderWidget(),
-    const HealthJournal(),
+    const HealthJournalProviderWidget(),
     const Recipes(),
   ];
 
